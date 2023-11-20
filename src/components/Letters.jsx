@@ -1,6 +1,42 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+function Letters({ letters, memberSelect }) {
+  const navigate = useNavigate();
+  const filteredList = letters.filter((item) => {
+    return (item.writedTo === memberSelect)
+  });
+
+  return (
+    <>
+      <StSection>
+        {
+          (filteredList.length !== 0) ?
+            filteredList.map((item) => {
+              return (
+                <StArticle key={item.id} onClick={() => navigate(`/detail/${item.id}`)}>
+                  <StDiv>
+                    <StFigure>
+                      <StImg
+                        src={item.avatar} alt="profile" />
+                    </StFigure>
+                    <StNameP>{item.nickname}</StNameP>
+                  </StDiv>
+                  <StContentBoxDiv>
+                    <StContentDiv>{item.content}</StContentDiv>
+                    <StDatep>{item.createdAt}</StDatep>
+                  </StContentBoxDiv>
+                </StArticle >
+              );
+            }) : <StArticle>{memberSelect}에게 남겨진 팬레터가 없습니다. 첫번째 펜레터의 주인공이 되세요! </StArticle>
+        }
+      </StSection >
+    </>
+  );
+}
+
+export default Letters;
+
 const StSection = styled.section`
   display: flex;
   flex-direction: column-reverse;
@@ -56,36 +92,3 @@ const StContentDiv = styled.div`
 const StDatep = styled.p`
   margin-left: auto;
 `;
-
-function Letters(props) {
-  const navigate = useNavigate();
-  return (
-    <>
-      <StSection>
-        {props.letters.filter((item) => {
-          console.log("writedTo:", item.writedTo, "mem:", props.memberSelect)
-          return (item.writedTo === props.memberSelect)
-        })
-          .map((item) => {
-            return (
-              <StArticle key={item.id} onClick={() => navigate("/detail")}>
-                <StDiv>
-                  <StFigure>
-                    <StImg
-                      src={item.avatar} alt="profile" />
-                  </StFigure>
-                  <StNameP>{item.nickname}</StNameP>
-                </StDiv>
-                <StContentBoxDiv>
-                  <StContentDiv>{item.content}</StContentDiv>
-                  <StDatep>{item.createdAt}</StDatep>
-                </StContentBoxDiv>
-              </StArticle >
-            );
-          })}
-      </StSection >
-    </>
-  );
-}
-
-export default Letters;
