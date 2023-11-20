@@ -1,7 +1,14 @@
 import React from "react";
+import "reset.css";
+
+import Router from "shared/Router";
 
 function App() {
-  return <div>과제 시작~!</div>;
+  return (
+    <div className="fan-page">
+      <Router />
+    </div>
+  );
 }
 
 export default App;
