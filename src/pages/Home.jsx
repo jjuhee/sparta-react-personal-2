@@ -2,9 +2,8 @@ import Header from 'components/Header';
 import LetterForm from 'components/LetterForm';
 import Letters from 'components/Letters';
 import React, { useState } from 'react'
-import fakeData from 'assets/fakeData'
 
-function Home() {
+function Home({ letters, setLetters }) {
     const memberData = [
         { name: "Heejun", color: "yellow" },
         { name: "Woohyuck", color: "blue" },
@@ -12,10 +11,10 @@ function Home() {
         { name: "Kangta", color: "green" },
         { name: "Jaewon", color: "orange" }];
     const [memberSelect, setMemberSelect] = useState("Heejun");
-    const [letters, setLetters] = useState(fakeData);
+
     return (
         <>
-            <Header memberSelect={memberSelect} setMemberSelect={setMemberSelect} />
+            <Header memberSelect={memberSelect} setMemberSelect={setMemberSelect} memberData={memberData} />
             <main>
                 <LetterForm letters={letters} setLetters={setLetters} memberData={memberData} />
                 <Letters letters={letters} memberSelect={memberSelect} />

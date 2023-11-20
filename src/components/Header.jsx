@@ -1,5 +1,32 @@
 import styled from "styled-components";
 
+function Header({ memberSelect, setMemberSelect, memberData }) {
+
+  return (
+    <StHeader>
+      <h1>H.O.T 팬레터 페이지</h1>
+
+      <StUl>
+        {
+          memberData.map((item) => {
+            return (
+              <StBtn
+                key={item.name}
+                color={(memberSelect === item.name) ? item.color : "white"}
+                onClick={() => setMemberSelect(item.name)}>
+                {item.name}
+              </StBtn>
+            )
+
+          })
+        }
+      </StUl>
+    </StHeader>
+  );
+}
+
+export default Header;
+
 const StHeader = styled.header`
   display: flex;
   text-align: center;
@@ -25,36 +52,3 @@ const StBtn = styled.button`
   border-radius: 10px 10px 0 0;
   background-color: ${(props) => props.color};
 `;
-
-function Header(props) {
-  const { memberSelect, setMemberSelect } = props;
-  const memberData = [
-    { name: "Heejun", color: "yellow" },
-    { name: "Woohyuck", color: "blue" },
-    { name: "Tony", color: "red" },
-    { name: "Kangta", color: "green" },
-    { name: "Jaewon", color: "orange" }];
-  return (
-    <StHeader>
-      <h1>H.O.T 팬레터 페이지</h1>
-
-      <StUl>
-        {
-          memberData.map((item) => {
-            return (
-              <StBtn
-                key={item.name}
-                color={(memberSelect === item.name) ? item.color : "white"}
-                onClick={() => setMemberSelect(item.name)}>
-                {item.name}
-              </StBtn>
-            )
-
-          })
-        }
-      </StUl>
-    </StHeader>
-  );
-}
-
-export default Header;
