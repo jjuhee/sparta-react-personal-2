@@ -1,8 +1,8 @@
+import fakeData from "assets/fakeData";
 import Detail from "pages/Detail";
 import Home from "pages/Home";
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import fakeData from "assets/fakeData";
 
 const Router = () => {
   const [letters, setLetters] = useState(fakeData);
@@ -13,10 +13,6 @@ const Router = () => {
         <Route
           path="/"
           element={<Home letters={letters} setLetters={setLetters} />}
-        />
-        <Route
-          path="detail"
-          element={<Detail letters={letters} setLetters={setLetters} />}
         />
         <Route
           path="detail/:id"
